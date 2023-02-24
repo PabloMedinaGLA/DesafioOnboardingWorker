@@ -6,6 +6,7 @@ using DesafioOnboardingWorker.Application;
 using DesafioOnboardingWorker.Infrastructure;
 using Andreani.ARQ.AMQStreams.Extensions;
 using Andreani.Scheme.Onboarding;
+using DesafioOnboardingWorker.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,7 +17,7 @@ builder.Services.AddInfrastructure(builder.Configuration);
 
 builder.Services
     .AddKafka(builder.Configuration)
-    .ToConsumer<Pedido>("PedidoCreado")
+    .ToConsumer<Subscriber,Pedido>("PedidoCreado")
     .Build();
 
 var app = builder.Build();
